@@ -1,0 +1,93 @@
+.outfit-collage {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.collage-main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: var(--space-sm);
+}
+
+.collage-accessories {
+  display: flex;
+  gap: var(--space-sm);
+  overflow-x: auto;
+  padding: var(--space-xs) 0;
+}
+
+.collage-item {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-cream);
+  aspect-ratio: 3/4;
+  display: flex;
+  flex-direction: column;
+}
+
+.collage-item.small {
+  width: 80px;
+  min-width: 80px;
+  aspect-ratio: 1;
+}
+
+.collage-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  flex: 1;
+}
+
+.collage-placeholder {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.placeholder-icon {
+  font-size: 32px;
+}
+
+.collage-item.small .placeholder-icon {
+  font-size: 24px;
+}
+
+.collage-item-label {
+  display: block;
+  text-align: center;
+  padding: var(--space-xs);
+  font-size: 11px;
+  color: var(--color-medium);
+  background: var(--color-white);
+  font-weight: 500;
+}
+
+.shuffle-hint {
+  position: absolute;
+  top: var(--space-xs);
+  left: var(--space-xs);
+  font-size: 14px;
+  background: rgba(255,255,255,0.9);
+  border-radius: var(--radius-full);
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.collage-item:hover .shuffle-hint {
+  opacity: 1;
+}
+
+.collage-empty {
+  text-align: center;
+  padding: var(--space-xl);
+  color: var(--color-light-gray);
+  font-size: 14px;
+}

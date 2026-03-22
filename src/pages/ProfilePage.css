@@ -1,0 +1,221 @@
+.profile-page {
+  padding: var(--space-lg);
+  padding-bottom: calc(var(--nav-height) + var(--space-xl));
+}
+
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-lg);
+}
+
+.profile-header h1 {
+  font-size: 28px;
+}
+
+.edit-btn, .save-edit-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.edit-btn {
+  background: var(--color-cream);
+  color: var(--color-dark);
+}
+
+.save-edit-btn {
+  background: var(--color-accent);
+  color: var(--color-white);
+}
+
+.profile-avatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.avatar-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-full);
+  background: var(--color-beige);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-accent-dark);
+}
+
+.profile-avatar h2 {
+  font-size: 24px;
+}
+
+.profile-stats {
+  display: flex;
+  justify-content: space-around;
+  padding: var(--space-lg);
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--space-xl);
+}
+
+.profile-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-accent-dark);
+}
+
+.stat-lbl {
+  font-size: 12px;
+  color: var(--color-light-gray);
+}
+
+.profile-section {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--space-md);
+}
+
+.profile-section h3 {
+  font-size: 16px;
+  margin-bottom: var(--space-md);
+}
+
+.profile-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--color-cream);
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.detail-label {
+  font-size: 14px;
+  color: var(--color-medium);
+}
+
+.detail-value {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.edit-fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.edit-field label {
+  display: block;
+  font-size: 13px;
+  color: var(--color-medium);
+  margin-bottom: var(--space-xs);
+}
+
+.edit-field input {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--color-beige);
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  background: var(--color-offwhite);
+}
+
+.edit-row {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.edit-row .edit-field {
+  flex: 1;
+}
+
+.body-type-chips, .style-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.chip {
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-beige);
+  background: var(--color-offwhite);
+  color: var(--color-medium);
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.chip.active {
+  background: var(--color-accent);
+  color: var(--color-white);
+  border-color: var(--color-accent);
+}
+
+.danger-zone {
+  margin-top: var(--space-xl);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.danger-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-white);
+  color: var(--color-error);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.danger-actions {
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-white);
+  border-top: 1px solid var(--color-cream);
+}
+
+.danger-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background: none;
+  color: var(--color-error);
+  font-size: 14px;
+  border: 1px solid var(--color-error);
+  border-radius: var(--radius-md);
+  width: 100%;
+  justify-content: center;
+}

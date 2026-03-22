@@ -1,0 +1,11 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-offwhite);
+}
+
+.app-content {
+  flex: 1;
+  padding-bottom: var(--nav-height);
+}

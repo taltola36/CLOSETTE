@@ -1,0 +1,238 @@
+.calendar-page {
+  padding: var(--space-lg);
+  padding-bottom: calc(var(--nav-height) + var(--space-xl));
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-lg);
+}
+
+.calendar-header h1 {
+  font-size: 28px;
+}
+
+.view-toggle {
+  display: flex;
+  background: var(--color-beige);
+  border-radius: var(--radius-md);
+  padding: 2px;
+}
+
+.view-toggle button {
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--color-medium);
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.view-toggle button.active {
+  background: var(--color-white);
+  color: var(--color-dark);
+  box-shadow: var(--shadow-sm);
+}
+
+.month-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-md);
+}
+
+.month-nav h3 {
+  font-size: 18px;
+  text-transform: capitalize;
+}
+
+.month-nav button {
+  background: none;
+  color: var(--color-medium);
+  padding: var(--space-xs);
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  margin-bottom: var(--space-lg);
+}
+
+.day-header {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-light-gray);
+  padding: var(--space-sm);
+}
+
+.day-cell {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--color-dark);
+  font-size: 14px;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.day-cell.empty {
+  pointer-events: none;
+}
+
+.day-cell.today .day-number {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.day-cell.selected {
+  background: var(--color-accent);
+  color: var(--color-white);
+}
+
+.day-cell.selected .day-number {
+  color: var(--color-white);
+}
+
+.day-cell.has-log {
+  font-weight: 600;
+}
+
+.day-dots {
+  display: flex;
+  gap: 2px;
+  margin-top: 2px;
+}
+
+.day-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+}
+
+.day-cell.selected .day-dot {
+  background: var(--color-white);
+}
+
+.day-detail {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.day-detail h4 {
+  font-size: 16px;
+  margin-bottom: var(--space-md);
+}
+
+.no-entries {
+  color: var(--color-light-gray);
+  font-size: 14px;
+  text-align: center;
+}
+
+.day-entries {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.log-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-cream);
+  border-radius: var(--radius-sm);
+}
+
+.log-event {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.log-items {
+  font-size: 12px;
+  color: var(--color-light-gray);
+}
+
+/* Feed View */
+.feed-empty {
+  text-align: center;
+  padding: var(--space-2xl);
+  color: var(--color-light-gray);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.feed-hint {
+  font-size: 13px;
+}
+
+.feed-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.feed-entry {
+  display: flex;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.feed-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 48px;
+  padding: var(--space-sm);
+  background: var(--color-cream);
+  border-radius: var(--radius-sm);
+}
+
+.feed-day {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-dark);
+  line-height: 1;
+}
+
+.feed-month {
+  font-size: 11px;
+  color: var(--color-light-gray);
+  text-transform: capitalize;
+}
+
+.feed-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-xs);
+}
+
+.feed-event {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.feed-items-count {
+  font-size: 12px;
+  color: var(--color-light-gray);
+}
