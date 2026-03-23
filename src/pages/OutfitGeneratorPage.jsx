@@ -224,7 +224,7 @@ export default function OutfitGeneratorPage({ showToast }) {
                 ערבבי מחדש (Shuffle)
               </button>
 
-              <InspirationCard event={selectedEvent} count={3} />
+              <InspirationCard outfit={outfits[activeOutfitIndex]} event={selectedEvent} count={3} />
 
               <div className="result-actions">
                 <button className="approve-btn" onClick={handleWoreIt}>

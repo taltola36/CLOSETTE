@@ -1,13 +1,17 @@
 import { useState } from 'react';
-import { RefreshCw, ExternalLink } from 'lucide-react';
-import { getInspirationForEvent, getRandomInspiration } from '../../services/pinterestInspiration';
+import { RefreshCw } from 'lucide-react';
+import { getInspirationForOutfit, getInspirationForEvent } from '../../services/pinterestInspiration';
 import './InspirationCard.css';
 
-export default function InspirationCard({ event, count = 3 }) {
-  const [images, setImages] = useState(() => getInspirationForEvent(event, count));
+export default function InspirationCard({ outfit, event, count = 3 }) {
+  const [images, setImages] = useState(() =>
+    outfit ? getInspirationForOutfit(outfit, count) : getInspirationForEvent(event, count)
+  );
 
   const refreshImages = () => {
-    setImages(getInspirationForEvent(event, count));
+    setImages(
+      outfit ? getInspirationForOutfit(outfit, count) : getInspirationForEvent(event, count)
+    );
   };
 
   if (!images || images.length === 0) return null;
@@ -17,7 +21,7 @@ export default function InspirationCard({ event, count = 3 }) {
       <div className="inspiration-header">
         <div className="inspiration-title">
           <span className="pinterest-icon">📌</span>
-          <h4>השראה מהרשת</h4>
+          <h4>השראה ללוק שלך</h4>
         </div>
         <button className="inspiration-refresh" onClick={refreshImages} aria-label="רענון השראות">
           <RefreshCw size={16} />
@@ -42,7 +46,7 @@ export default function InspirationCard({ event, count = 3 }) {
           </div>
         ))}
       </div>
-      <p className="inspiration-hint">לוקים דומים לפריטים שבארון שלך</p>
+      <p className="inspiration-hint">לוקים דומים למה שהרכבנו לך מהארון</p>
     </div>
   );
 }

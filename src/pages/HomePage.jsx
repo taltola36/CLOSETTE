@@ -111,7 +111,7 @@ export default function HomePage({ showToast }) {
           )}
 
           {dailyOutfit && (
-            <InspirationCard event="casual" count={3} />
+            <InspirationCard outfit={dailyOutfit} count={3} />
           )}
 
           <button className="hero-cta" onClick={() => navigate('/generator')}>
