@@ -3,6 +3,10 @@
   padding-bottom: var(--space-xl);
 }
 
+.home-page .inspiration-card {
+  margin-bottom: var(--space-lg);
+}
+
 .home-header {
   margin-bottom: var(--space-lg);
 }

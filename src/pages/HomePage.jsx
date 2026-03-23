@@ -4,6 +4,7 @@ import { getUserProfile, getWardrobe, logOutfitWorn } from '../services/storage'
 import { generateOutfits } from '../services/outfitGenerator';
 import { Sparkles, RefreshCw, Check, Sun, Cloud, CloudRain, Menu, ShoppingBag } from 'lucide-react';
 import OutfitCollage from '../components/common/OutfitCollage';
+import InspirationCard from '../components/common/InspirationCard';
 import './HomePage.css';
 
 const TIPS = [
@@ -107,6 +108,10 @@ export default function HomePage({ showToast }) {
                 </button>
               </div>
             </div>
+          )}
+
+          {dailyOutfit && (
+            <InspirationCard event="casual" count={3} />
           )}
 
           <button className="hero-cta" onClick={() => navigate('/generator')}>

@@ -4,6 +4,7 @@ import { generateOutfits, shuffleSingleItem } from '../services/outfitGenerator'
 import { logOutfitWorn, saveOutfit, getWardrobe } from '../services/storage';
 import { Sparkles, Check, Heart, RefreshCw, X, Sun, Cloud, CloudRain } from 'lucide-react';
 import OutfitCollage from '../components/common/OutfitCollage';
+import InspirationCard from '../components/common/InspirationCard';
 import './OutfitGeneratorPage.css';
 
 const EVENTS = [
@@ -222,6 +223,8 @@ export default function OutfitGeneratorPage({ showToast }) {
                 <RefreshCw size={18} />
                 ערבבי מחדש (Shuffle)
               </button>
+
+              <InspirationCard event={selectedEvent} count={3} />
 
               <div className="result-actions">
                 <button className="approve-btn" onClick={handleWoreIt}>
