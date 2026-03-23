@@ -128,7 +128,7 @@ export default function CalendarPage({ showToast }) {
             <div className="feed-empty">
               <CalendarIcon size={48} />
               <p>עדיין אין לוקים ביומן</p>
-              <p className="feed-hint">לחצ/י "לבשתי!" כדי לשמור לוקים כאן</p>
+              <p className="feed-hint">לחצי "לבשתי!" כדי לשמור לוקים כאן</p>
             </div>
           ) : (
             <div className="feed-list">

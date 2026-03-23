@@ -45,7 +45,7 @@ export default function ProfilePage({ showToast }) {
   };
 
   const handleReset = () => {
-    if (window.confirm('האם את/ה בטוח/ה? כל הנתונים יימחקו.')) {
+    if (window.confirm('את בטוחה? כל הנתונים יימחקו.')) {
       clearAllData();
       window.location.reload();
     }

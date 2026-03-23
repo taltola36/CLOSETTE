@@ -133,7 +133,7 @@ export default function AddItemPage({ showToast }) {
               <div className="processing-overlay">
                 <Loader size={32} className="spinner" />
                 <span>AI PROCESSED</span>
-                <span className="process-sub">מעבד/ת תמונה...</span>
+                <span className="process-sub">מעבדת תמונה...</span>
               </div>
             </div>
           ) : (
@@ -191,7 +191,7 @@ export default function AddItemPage({ showToast }) {
                 className="category-selector"
                 onClick={() => setShowCategories(!showCategories)}
               >
-                {category || 'בחר/י קטגוריה'}
+                {category || 'בחרי קטגוריה'}
                 <ChevronDown size={16} />
               </button>
               {showCategories && (

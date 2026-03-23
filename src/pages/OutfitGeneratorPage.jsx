@@ -91,7 +91,7 @@ export default function OutfitGeneratorPage({ showToast }) {
         <div className="generator-empty">
           <Sparkles size={48} />
           <h2>צריך עוד קצת פריטים</h2>
-          <p>הוסיפ/י לפחות 3 פריטים לארון כדי שנוכל ליצור לוקים מושלמים</p>
+          <p>הוסיפי לפחות 3 פריטים לארון כדי שנוכל ליצור לוקים מושלמים</p>
           <button className="primary-btn" onClick={() => navigate('/closet/add')}>
             הוספת פריטים
           </button>

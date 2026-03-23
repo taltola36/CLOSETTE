@@ -4,11 +4,11 @@ import { ArrowRight, ChevronLeft } from 'lucide-react';
 import './OnboardingPage.css';
 
 const STYLES = [
-  { id: 'rural', label: 'כפרי / יפני', image: 'https://images.unsplash.com/photo-1523199455310-87b16c0eab58?w=300&h=400&fit=crop' },
-  { id: 'classic', label: 'קלאסי', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=400&fit=crop' },
-  { id: 'streetwear', label: 'סטריטוור', image: 'https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?w=300&h=400&fit=crop' },
-  { id: 'elegant', label: 'אלגנטי', image: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=300&h=400&fit=crop' },
+  { id: 'classic', label: 'קלאסי', image: 'https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=300&h=400&fit=crop' },
   { id: 'bohemian', label: 'בוהו', image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=300&h=400&fit=crop' },
+  { id: 'streetwear', label: 'סטריטוור', image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=300&h=400&fit=crop' },
+  { id: 'elegant', label: 'אלגנטי', image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=300&h=400&fit=crop' },
+  { id: 'romantic', label: 'רומנטי', image: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=300&h=400&fit=crop' },
   { id: 'minimalist', label: 'מינימליסטי', image: 'https://images.unsplash.com/photo-1485968579580-b6d095142e6e?w=300&h=400&fit=crop' },
 ];
 
@@ -25,7 +25,6 @@ export default function OnboardingPage({ onComplete }) {
     name: '',
     styles: [],
     bodyType: '',
-    gender: 'female',
   });
 
   const totalSteps = 3;
@@ -74,7 +73,7 @@ export default function OnboardingPage({ onComplete }) {
         {step === 0 && (
           <div className="onboarding-step fade-in">
             <h2>מה הסטייל שלך?</h2>
-            <p className="onboarding-subtitle">בחרי את המגמות שאת הכי מתחברת אליהם כדי שנוכל לדייק את ההמלצות עבורך</p>
+            <p className="onboarding-subtitle">בחרי את הסגנונות שאת הכי מתחברת אליהם כדי שנוכל לדייק את ההמלצות עבורך</p>
             <div className="styles-grid">
               {STYLES.map(style => (
                 <button
@@ -98,7 +97,7 @@ export default function OnboardingPage({ onComplete }) {
         {step === 1 && (
           <div className="onboarding-step fade-in">
             <h2>מבנה הגוף שלך</h2>
-            <p className="onboarding-subtitle">בחרי את המאפיין שהכי קרוב למבנה הגוף שלך. זה עוזר לנו להתאים לך את הגזרות המתאימות ביותר.</p>
+            <p className="onboarding-subtitle">בחרי את המאפיין שהכי קרוב למבנה הגוף שלך. זה עוזר לנו להתאים לך את הגזרות הכי מחמיאות.</p>
             <div className="body-types-grid">
               {BODY_TYPES.map(type => (
                 <button
@@ -130,20 +129,6 @@ export default function OnboardingPage({ onComplete }) {
               onChange={e => setProfile(prev => ({ ...prev, name: e.target.value }))}
               autoFocus
             />
-            <div className="gender-select">
-              <button
-                className={`gender-btn ${profile.gender === 'female' ? 'active' : ''}`}
-                onClick={() => setProfile(prev => ({ ...prev, gender: 'female' }))}
-              >
-                נשי
-              </button>
-              <button
-                className={`gender-btn ${profile.gender === 'male' ? 'active' : ''}`}
-                onClick={() => setProfile(prev => ({ ...prev, gender: 'male' }))}
-              >
-                גברי
-              </button>
-            </div>
           </div>
         )}
       </div>

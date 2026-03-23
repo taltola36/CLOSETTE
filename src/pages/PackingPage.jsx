@@ -84,7 +84,7 @@ export default function PackingPage({ showToast }) {
 
       {wardrobe.length < 3 && (
         <div className="packing-notice">
-          <p>הוסיפ/י פריטים לארון כדי ליצור רשימות אריזה חכמות</p>
+          <p>הוסיפי פריטים לארון כדי ליצור רשימות אריזה חכמות</p>
         </div>
       )}
 
@@ -140,7 +140,7 @@ export default function PackingPage({ showToast }) {
 
           <button className="generate-packing-btn" onClick={handleCreate}>
             <Plane size={18} />
-            צור/י רשימת אריזה
+            צרי רשימת אריזה
           </button>
         </div>
       )}
