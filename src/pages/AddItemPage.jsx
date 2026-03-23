@@ -119,7 +119,7 @@ export default function AddItemPage({ showToast }) {
           <div className="upload-area processing">
             <Loader size={32} className="spinner" />
             <span>מעבד/ת תמונה...</span>
-            <span className="upload-hint">הסרת רקע, חידוד וחיתוך חכם</span>
+            <span className="upload-hint">הסרת רקע חכמה, חידוד וחיתוך - ייתכן שייקח כמה שניות</span>
           </div>
         ) : imageUrl ? (
           <div className="image-preview">
