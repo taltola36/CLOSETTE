@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { addWardrobeItem } from '../services/storage';
 import { processImage } from '../services/imageProcessor';
-import { Camera, Upload, X, Check, ChevronDown, Loader } from 'lucide-react';
+import { Camera, Upload, X, Check, ChevronDown, Loader, ArrowRight } from 'lucide-react';
 import './AddItemPage.css';
 
 const CATEGORIES = [
@@ -54,6 +54,7 @@ export default function AddItemPage({ showToast }) {
   const [season, setSeason] = useState('all');
   const [showCategories, setShowCategories] = useState(false);
   const [processingImage, setProcessingImage] = useState(false);
+  const [viewStep, setViewStep] = useState('capture'); // capture | details
 
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
@@ -63,10 +64,13 @@ export default function AddItemPage({ showToast }) {
     try {
       const processed = await processImage(file);
       setImageUrl(processed);
+      setViewStep('details');
     } catch {
-      // Fallback to raw image if processing fails
       const reader = new FileReader();
-      reader.onload = (ev) => setImageUrl(ev.target.result);
+      reader.onload = (ev) => {
+        setImageUrl(ev.target.result);
+        setViewStep('details');
+      };
       reader.readAsDataURL(file);
     } finally {
       setProcessingImage(false);
@@ -97,120 +101,162 @@ export default function AddItemPage({ showToast }) {
     navigate('/closet');
   };
 
+  const handleSkipToDetails = () => {
+    setViewStep('details');
+  };
+
   return (
     <div className="add-item-page">
       <div className="add-item-header">
-        <button className="back-btn" onClick={() => navigate(-1)}>
+        <button className="close-btn" onClick={() => navigate(-1)}>
           <X size={24} />
         </button>
-        <h2>הוספת פריט</h2>
-        <button
-          className="save-btn"
-          onClick={handleSave}
-          disabled={!category}
-        >
-          <Check size={20} />
-          שמירה
-        </button>
-      </div>
-
-      <div className="image-upload-section">
-        {processingImage ? (
-          <div className="upload-area processing">
-            <Loader size={32} className="spinner" />
-            <span>מעבד/ת תמונה...</span>
-            <span className="upload-hint">סיבוב אוטומטי ודחיסה</span>
-          </div>
-        ) : imageUrl ? (
-          <div className="image-preview">
-            <img src={imageUrl} alt="preview" />
-            <button className="remove-image" onClick={() => setImageUrl('')}>
-              <X size={16} />
-            </button>
-          </div>
-        ) : (
-          <div className="upload-area" onClick={() => fileInputRef.current?.click()}>
-            <Camera size={32} />
-            <span>צלמ/י או העל/י תמונה</span>
-            <span className="upload-hint">לתוצאות הכי טובות, צלמ/י על רקע בהיר</span>
-          </div>
-        )}
-        <input
-          ref={fileInputRef}
-          type="file"
-          accept="image/*"
-          capture="environment"
-          onChange={handleImageUpload}
-          style={{ display: 'none' }}
-        />
-      </div>
-
-      <div className="form-section">
-        <div className="form-field">
-          <label>שם הפריט (אופציונלי)</label>
-          <input
-            type="text"
-            placeholder="למשל: חולצה לבנה של זארה"
-            value={name}
-            onChange={e => setName(e.target.value)}
-          />
-        </div>
-
-        <div className="form-field">
-          <label>קטגוריה *</label>
-          <button
-            className="category-selector"
-            onClick={() => setShowCategories(!showCategories)}
-          >
-            {category || 'בחר/י קטגוריה'}
-            <ChevronDown size={16} />
+        <h2>{viewStep === 'capture' ? 'צילום פריט' : 'פרטי הפריט'}</h2>
+        {viewStep === 'details' ? (
+          <button className="save-btn" onClick={handleSave} disabled={!category}>
+            שמירה ✓
           </button>
-          {showCategories && (
-            <div className="category-dropdown">
-              {CATEGORIES.map(cat => (
-                <button
-                  key={cat}
-                  className={`category-option ${category === cat ? 'selected' : ''}`}
-                  onClick={() => { setCategory(cat); setShowCategories(false); }}
-                >
-                  {cat}
-                </button>
-              ))}
+        ) : (
+          <div style={{ width: 60 }} />
+        )}
+      </div>
+
+      {viewStep === 'capture' && (
+        <div className="capture-section">
+          <div className="smart-capture-label">
+            <span>SMART CAPTURE</span>
+            <p>צלמי את הפריט במרכז</p>
+          </div>
+
+          {processingImage ? (
+            <div className="capture-area processing">
+              <div className="processing-overlay">
+                <Loader size={32} className="spinner" />
+                <span>AI PROCESSED</span>
+                <span className="process-sub">מעבד/ת תמונה...</span>
+              </div>
+            </div>
+          ) : (
+            <div className="capture-area" onClick={() => fileInputRef.current?.click()}>
+              <div className="capture-frame">
+                <div className="frame-corner tl" />
+                <div className="frame-corner tr" />
+                <div className="frame-corner bl" />
+                <div className="frame-corner br" />
+                <Camera size={48} />
+                <span>לחצי לצילום או העלאה</span>
+              </div>
             </div>
           )}
-        </div>
 
-        <div className="form-field">
-          <label>צבע</label>
-          <div className="color-grid">
-            {COLORS.map(c => (
-              <button
-                key={c.name}
-                className={`color-swatch ${color === c.name ? 'selected' : ''}`}
-                style={{ backgroundColor: c.hex }}
-                onClick={() => handleColorSelect(c)}
-                title={c.name}
-              />
-            ))}
+          <button className="capture-main-btn" onClick={() => fileInputRef.current?.click()}>
+            <div className="capture-circle">
+              <Camera size={24} />
+            </div>
+          </button>
+
+          <div className="capture-bottom-actions">
+            <button className="text-link" onClick={handleSkipToDetails}>
+              דלגי לפרטים ←
+            </button>
           </div>
-          {color && <span className="selected-color">{color}</span>}
         </div>
+      )}
 
-        <div className="form-field">
-          <label>עונה</label>
-          <div className="season-options">
-            {SEASONS.map(s => (
-              <button
-                key={s.id}
-                className={`season-btn ${season === s.id ? 'active' : ''}`}
-                onClick={() => setSeason(s.id)}
-              >
-                {s.label}
+      {viewStep === 'details' && (
+        <div className="details-section">
+          {imageUrl && (
+            <div className="detail-image-preview">
+              <img src={imageUrl} alt="preview" />
+              <button className="change-image" onClick={() => { setViewStep('capture'); setImageUrl(''); }}>
+                החלפת תמונה
               </button>
-            ))}
+            </div>
+          )}
+
+          <div className="form-section">
+            <div className="form-field">
+              <label>שם הפריט (אופציונלי)</label>
+              <input
+                type="text"
+                placeholder="למשל: חולצה לבנה של זארה"
+                value={name}
+                onChange={e => setName(e.target.value)}
+              />
+            </div>
+
+            <div className="form-field">
+              <label>קטגוריה *</label>
+              <button
+                className="category-selector"
+                onClick={() => setShowCategories(!showCategories)}
+              >
+                {category || 'בחר/י קטגוריה'}
+                <ChevronDown size={16} />
+              </button>
+              {showCategories && (
+                <div className="category-dropdown">
+                  {CATEGORIES.map(cat => (
+                    <button
+                      key={cat}
+                      className={`category-option ${category === cat ? 'selected' : ''}`}
+                      onClick={() => { setCategory(cat); setShowCategories(false); }}
+                    >
+                      {cat}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div className="form-field">
+              <label>צבע</label>
+              <div className="color-grid">
+                {COLORS.map(c => (
+                  <button
+                    key={c.name}
+                    className={`color-swatch ${color === c.name ? 'selected' : ''}`}
+                    style={{ backgroundColor: c.hex }}
+                    onClick={() => handleColorSelect(c)}
+                    title={c.name}
+                  />
+                ))}
+              </div>
+              {color && <span className="selected-color">{color}</span>}
+            </div>
+
+            <div className="form-field">
+              <label>עונה</label>
+              <div className="season-options">
+                {SEASONS.map(s => (
+                  <button
+                    key={s.id}
+                    className={`season-btn ${season === s.id ? 'active' : ''}`}
+                    onClick={() => setSeason(s.id)}
+                  >
+                    {s.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="detail-footer">
+            <button className="save-main-btn" onClick={handleSave} disabled={!category}>
+              שמירה ✓
+            </button>
           </div>
         </div>
-      </div>
+      )}
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/*"
+        capture="environment"
+        onChange={handleImageUpload}
+        style={{ display: 'none' }}
+      />
     </div>
   );
 }

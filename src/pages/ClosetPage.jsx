@@ -60,7 +60,7 @@ export default function ClosetPage({ showToast }) {
     <div className="closet-page">
       <div className="closet-header">
         <h1>הארון שלי</h1>
-        <p className="closet-count">{items.length} פריטים</p>
+        <span className="closet-count">{items.length} פריטים</span>
       </div>
 
       <div className="search-bar">
