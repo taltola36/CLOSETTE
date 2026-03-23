@@ -76,6 +76,22 @@
   font-weight: 400 !important;
 }
 
+.upload-area.processing {
+  border-color: var(--color-accent);
+  background: var(--color-cream);
+  pointer-events: none;
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+  color: var(--color-accent);
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 .image-preview {
   position: relative;
   border-radius: var(--radius-lg);

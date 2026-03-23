@@ -1,7 +1,8 @@
 import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { addWardrobeItem } from '../services/storage';
-import { Camera, Upload, X, Check, ChevronDown } from 'lucide-react';
+import { processImage } from '../services/imageProcessor';
+import { Camera, Upload, X, Check, ChevronDown, Loader } from 'lucide-react';
 import './AddItemPage.css';
 
 const CATEGORIES = [
@@ -52,16 +53,24 @@ export default function AddItemPage({ showToast }) {
   const [colorHex, setColorHex] = useState('');
   const [season, setSeason] = useState('all');
   const [showCategories, setShowCategories] = useState(false);
+  const [processingImage, setProcessingImage] = useState(false);
 
-  const handleImageUpload = (e) => {
+  const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
-    const reader = new FileReader();
-    reader.onload = (ev) => {
-      setImageUrl(ev.target.result);
-    };
-    reader.readAsDataURL(file);
+    setProcessingImage(true);
+    try {
+      const processed = await processImage(file);
+      setImageUrl(processed);
+    } catch {
+      // Fallback to raw image if processing fails
+      const reader = new FileReader();
+      reader.onload = (ev) => setImageUrl(ev.target.result);
+      reader.readAsDataURL(file);
+    } finally {
+      setProcessingImage(false);
+    }
   };
 
   const handleColorSelect = (c) => {
@@ -106,7 +115,13 @@ export default function AddItemPage({ showToast }) {
       </div>
 
       <div className="image-upload-section">
-        {imageUrl ? (
+        {processingImage ? (
+          <div className="upload-area processing">
+            <Loader size={32} className="spinner" />
+            <span>מעבד/ת תמונה...</span>
+            <span className="upload-hint">חיתוך חכם וסיבוב אוטומטי</span>
+          </div>
+        ) : imageUrl ? (
           <div className="image-preview">
             <img src={imageUrl} alt="preview" />
             <button className="remove-image" onClick={() => setImageUrl('')}>
