@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 import BottomNav from './components/layout/BottomNav';
@@ -10,46 +10,11 @@ import PackingPage from './pages/PackingPage';
 import ProfilePage from './pages/ProfilePage';
 import OnboardingPage from './pages/OnboardingPage';
 import AddItemPage from './pages/AddItemPage';
-import { isOnboardingComplete, getWardrobe, saveWardrobe, getProcessingVersion, setProcessingVersion } from './services/storage';
-import { reprocessImage, PROCESSING_VERSION } from './services/imageProcessor';
+import { isOnboardingComplete } from './services/storage';
 
 function App() {
   const [onboardingDone, setOnboardingDone] = useState(isOnboardingComplete());
   const [toast, setToast] = useState(null);
-  const [migrating, setMigrating] = useState(false);
-
-  // Migrate existing wardrobe images when processing version changes
-  useEffect(() => {
-    const currentVersion = getProcessingVersion();
-    if (currentVersion >= PROCESSING_VERSION) return;
-
-    const items = getWardrobe();
-    const itemsWithImages = items.filter(item => item.imageUrl && item.imageUrl.startsWith('data:'));
-    if (itemsWithImages.length === 0) {
-      setProcessingVersion(PROCESSING_VERSION);
-      return;
-    }
-
-    setMigrating(true);
-    (async () => {
-      try {
-        const updatedItems = [...items];
-        for (const item of updatedItems) {
-          if (item.imageUrl && item.imageUrl.startsWith('data:')) {
-            try {
-              item.imageUrl = await reprocessImage(item.imageUrl);
-            } catch {
-              // Keep original image if reprocessing fails
-            }
-          }
-        }
-        saveWardrobe(updatedItems);
-        setProcessingVersion(PROCESSING_VERSION);
-      } finally {
-        setMigrating(false);
-      }
-    })();
-  }, []);
 
   const showToast = (message) => {
     setToast(message);
@@ -62,15 +27,6 @@ function App() {
 
   if (!onboardingDone) {
     return <OnboardingPage onComplete={handleOnboardingComplete} />;
-  }
-
-  if (migrating) {
-    return (
-      <div className="app" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', flexDirection: 'column', gap: '16px' }}>
-        <div className="spinner" style={{ width: 40, height: 40, border: '3px solid #eee', borderTopColor: '#B8907A', borderRadius: '50%', animation: 'spin 1s linear infinite' }} />
-        <p style={{ color: '#6B5E5E', fontFamily: 'Assistant, sans-serif' }}>מעדכן תמונות...</p>
-      </div>
-    );
   }
 
   return (

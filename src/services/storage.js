@@ -6,7 +6,6 @@ const KEYS = {
   OUTFIT_LOG: 'closette_outfit_log',
   PACKING_LISTS: 'closette_packing_lists',
   ONBOARDING_COMPLETE: 'closette_onboarding_complete',
-  PROCESSING_VERSION: 'closette_processing_version',
 };
 
 function get(key) {
@@ -167,15 +166,6 @@ export function setOnboardingComplete() {
 
 export function resetOnboarding() {
   remove(KEYS.ONBOARDING_COMPLETE);
-}
-
-// Processing version
-export function getProcessingVersion() {
-  return get(KEYS.PROCESSING_VERSION) || 0;
-}
-
-export function setProcessingVersion(version) {
-  set(KEYS.PROCESSING_VERSION, version);
 }
 
 // Clear all data
